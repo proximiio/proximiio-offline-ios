@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'ProximiioOffline_Example' do
+  pod 'ProximiioOffline', :path => '../'
+
+  target 'ProximiioOffline_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
