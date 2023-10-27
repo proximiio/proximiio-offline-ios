@@ -7,12 +7,23 @@
 //
 
 import UIKit
+import ProximiioOffline
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        ProximiioOffline.shared.setPath("offline_data")
+        ProximiioOffline.shared.setToken("INSERT TOKEN HERE");
+        
+        Task {
+            do {
+                try await ProximiioOffline.shared.start()
+            } catch {
+                NSLog("some error: \(error)")
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

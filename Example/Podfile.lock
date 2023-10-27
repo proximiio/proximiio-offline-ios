@@ -1,0 +1,31 @@
+PODS:
+  - Alamofire (5.7.1)
+  - FlyingFox (0.12.2):
+    - FlyingSocks (~> 0.12.2)
+  - FlyingSocks (0.12.2)
+  - ProximiioOffline (0.1.0):
+    - Alamofire
+    - FlyingFox
+
+DEPENDENCIES:
+  - ProximiioOffline (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - FlyingFox
+    - FlyingSocks
+
+EXTERNAL SOURCES:
+  ProximiioOffline:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+  FlyingFox: 64c3302f81bd8690514a8988dafc9ff951781e7d
+  FlyingSocks: 7b2a722af4be5cf74499c0a5a94d3f31f028a4f7
+  ProximiioOffline: e6b99b9232d03931059f0a10a02e31bc9a7b83ca
+
+PODFILE CHECKSUM: f8958c479ec1b704397a7d04ff883ee793af99b9
+
+COCOAPODS: 1.11.2

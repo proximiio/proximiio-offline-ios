@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,8 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		61739F802AEAD46F00772DA0 /* FlyingFox in Frameworks */ = {isa = PBXBuildFile; productRef = 61739F7F2AEAD46F00772DA0 /* FlyingFox */; };
+		61739F8E2AEB120100772DA0 /* offline_data in Resources */ = {isa = PBXBuildFile; fileRef = 61739F8D2AEB120100772DA0 /* offline_data */; };
 		69599165FE7F9AC196AA50C2 /* Pods_ProximiioOffline_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47A7CAAA217491EA8775BBE3 /* Pods_ProximiioOffline_Example.framework */; };
 		E307C33C6B03D2BBEE097CDE /* Pods_ProximiioOffline_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF1ADAC49A9B75D3F60F88E /* Pods_ProximiioOffline_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -28,11 +30,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		063FA5C61F6486275FD72CC6 /* ProximiioOffline.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = ProximiioOffline.podspec; path = ../ProximiioOffline.podspec; sourceTree = "<group>"; };
+		063FA5C61F6486275FD72CC6 /* ProximiioOffline.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ProximiioOffline.podspec; path = ../ProximiioOffline.podspec; sourceTree = "<group>"; };
 		47A7CAAA217491EA8775BBE3 /* Pods_ProximiioOffline_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProximiioOffline_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		49A2278A0E77A4A73899B48E /* Pods-ProximiioOffline_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProximiioOffline_Example.release.xcconfig"; path = "Target Support Files/Pods-ProximiioOffline_Example/Pods-ProximiioOffline_Example.release.xcconfig"; sourceTree = "<group>"; };
 		4BAE2DB4517CFF0D90FC1BBF /* Pods-ProximiioOffline_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProximiioOffline_Tests.debug.xcconfig"; path = "Target Support Files/Pods-ProximiioOffline_Tests/Pods-ProximiioOffline_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		59C5A4328BDB247D6EFB2360 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		59C5A4328BDB247D6EFB2360 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* ProximiioOffline_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProximiioOffline_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,8 +45,11 @@
 		607FACE51AFB9204008FA782 /* ProximiioOffline_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProximiioOffline_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		61739F842AEADD9900772DA0 /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		61739F862AEADE4C00772DA0 /* offline_data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = offline_data; path = ProximiioOffline/offline_data; sourceTree = "<group>"; };
+		61739F8D2AEB120100772DA0 /* offline_data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = offline_data; sourceTree = "<group>"; };
 		8EF1ADAC49A9B75D3F60F88E /* Pods_ProximiioOffline_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProximiioOffline_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C15004CC3F91D80108498143 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		C15004CC3F91D80108498143 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		CD6C5FA2AEDEE79079F7587E /* Pods-ProximiioOffline_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProximiioOffline_Tests.release.xcconfig"; path = "Target Support Files/Pods-ProximiioOffline_Tests/Pods-ProximiioOffline_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		CF0DDA5CBD77F5CE1D2F3450 /* Pods-ProximiioOffline_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProximiioOffline_Example.debug.xcconfig"; path = "Target Support Files/Pods-ProximiioOffline_Example/Pods-ProximiioOffline_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -55,6 +60,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				69599165FE7F9AC196AA50C2 /* Pods_ProximiioOffline_Example.framework in Frameworks */,
+				61739F802AEAD46F00772DA0 /* FlyingFox in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +78,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				61739F8D2AEB120100772DA0 /* offline_data */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for ProximiioOffline */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -93,6 +100,7 @@
 		607FACD21AFB9204008FA782 /* Example for ProximiioOffline */ = {
 			isa = PBXGroup;
 			children = (
+				61739F832AEADD7500772DA0 /* offline_data */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -139,9 +147,18 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		61739F832AEADD7500772DA0 /* offline_data */ = {
+			isa = PBXGroup;
+			children = (
+				61739F842AEADD9900772DA0 /* package.json */,
+			);
+			path = offline_data;
+			sourceTree = "<group>";
+		};
 		753FC37D1290F1768A33F4D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				61739F862AEADE4C00772DA0 /* offline_data */,
 				47A7CAAA217491EA8775BBE3 /* Pods_ProximiioOffline_Example.framework */,
 				8EF1ADAC49A9B75D3F60F88E /* Pods_ProximiioOffline_Tests.framework */,
 			);
@@ -156,7 +173,6 @@
 				4BAE2DB4517CFF0D90FC1BBF /* Pods-ProximiioOffline_Tests.debug.xcconfig */,
 				CD6C5FA2AEDEE79079F7587E /* Pods-ProximiioOffline_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -169,6 +185,7 @@
 			buildPhases = (
 				F50A5784214B8DE003E9D9E6 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
+				61739F8C2AEB10A500772DA0 /* Fetch Offline Data */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
 				F0AB7814B5A17C615D406244 /* [CP] Embed Pods Frameworks */,
@@ -178,6 +195,9 @@
 			dependencies = (
 			);
 			name = ProximiioOffline_Example;
+			packageProductDependencies = (
+				61739F7F2AEAD46F00772DA0 /* FlyingFox */,
+			);
 			productName = ProximiioOffline;
 			productReference = 607FACD01AFB9204008FA782 /* ProximiioOffline_Example.app */;
 			productType = "com.apple.product-type.application";
@@ -227,10 +247,14 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
+			packageReferences = (
+				61739F7E2AEAD46F00772DA0 /* XCRemoteSwiftPackageReference "FlyingFox.git" */,
+			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -246,6 +270,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61739F8E2AEB120100772DA0 /* offline_data in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -262,6 +287,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		61739F8C2AEB10A500772DA0 /* Fetch Offline Data */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Fetch Offline Data";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/bash;
+			shellScript = "echo \"Downloading offline data\"\n\nTOKEN=\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImlzcyI6ImYwZGZlMDc5LTFkNmUtNDdkMi1hM2ZkLWU4YzQ0MTMxMTc4NiIsInR5cGUiOiJhcHBsaWNhdGlvbiIsImFwcGxpY2F0aW9uX2lkIjoiM2Y5NDM4MTYtMDRhNy00ZTZjLWFhMDgtZDZlOWEzYWVmYzFmIn0.dtV9ypJNNSB5BdqIZTXuQXPylJst0h4ptrp5RXf4jSU\"\nAUTH_HEADER=\"Authorization: Bearer $TOKEN\"\n\necho $AUTH_HEADER\nmkdir -p offline_data/core\nmkdir -p offline_data/v5/geo/styles\n\nwget --header=\"$AUTH_HEADER\" https://api.proximi.fi/core/package -O offline_data/core/package\nwget --header=\"$AUTH_HEADER\" https://api.proximi.fi/core/current_user -O offline_data/core/current_user\nwget --header=\"$AUTH_HEADER\" https://api.proximi.fi/core/campuses -O offline_data/core/campuses\nwget --header=\"$AUTH_HEADER\" https://api.proximi.fi/v5/geo/styles/default -O offline_data/v5/geo/styles/default\nwget --header=\"$AUTH_HEADER\" https://api.proximi.fi/v5/geo/amenities -O offline_data/v5/geo/amenities\nwget --header=\"$AUTH_HEADER\" https://api.proximi.fi/v5/geo/features -O offline_data/v5/geo/feature\n";
+		};
 		C90C5AF0E0375866C7CB9761 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -291,10 +335,16 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ProximiioOffline_Example/Pods-ProximiioOffline_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/FlyingFox/FlyingFox.framework",
+				"${BUILT_PRODUCTS_DIR}/FlyingSocks/FlyingSocks.framework",
 				"${BUILT_PRODUCTS_DIR}/ProximiioOffline/ProximiioOffline.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FlyingFox.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FlyingSocks.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProximiioOffline.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -468,7 +518,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -479,7 +530,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ProximiioOffline/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -494,7 +549,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ProximiioOffline/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -516,7 +575,12 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -534,7 +598,12 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -574,6 +643,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		61739F7E2AEAD46F00772DA0 /* XCRemoteSwiftPackageReference "FlyingFox.git" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/swhitty/FlyingFox.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.12.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		61739F7F2AEAD46F00772DA0 /* FlyingFox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 61739F7E2AEAD46F00772DA0 /* XCRemoteSwiftPackageReference "FlyingFox.git" */;
+			productName = FlyingFox;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 607FACC81AFB9204008FA782 /* Project object */;
 }

@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'ProximiioOffline'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of ProximiioOffline.'
+  s.summary          = 'Proximiio Offline API for IOS'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -21,22 +21,15 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/wirrareka/ProximiioOffline'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+  s.homepage         = 'https://github.com/proximiio/proximiiio-offline-ios'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'wirrareka' => 'wirrareka@timeflux.org' }
-  s.source           = { :git => 'https://github.com/wirrareka/ProximiioOffline.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { 'wirrareka' => 'matej.drzik@' }
+  s.source           = { :git => 'https://github.com/proximiiio/proximiiio-offline-ios.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '10.0'
 
   s.source_files = 'ProximiioOffline/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'ProximiioOffline' => ['ProximiioOffline/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'Alamofire'
+  s.dependency 'FlyingFox'
 end
