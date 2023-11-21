@@ -8,18 +8,25 @@
 
 import UIKit
 import ProximiioOffline
+import Proximiio
 
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ProximiioOffline.shared.setPath("offline_data")
-        ProximiioOffline.shared.setToken("INSERT TOKEN HERE");
+        let PROXIMIIO_TOKEN = "INSERT-TOKEN-HERE"
         
         Task {
             do {
-                try await ProximiioOffline.shared.start()
+                try await ProximiioOffline.shared.start(PROXIMIIO_TOKEN)
+                
+                Proximiio.sharedInstance().auth(withToken: PROXIMIIO_TOKEN) { state in
+                    if (state == kProximiioReady) {
+                        Proximiio.sharedInstance()?.requestPermissions(true)
+                        NSLog("APP PROXIMIIO INITIALIZED")
+                    }
+                }
             } catch {
                 NSLog("some error: \(error)")
             }
