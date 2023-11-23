@@ -26,7 +26,6 @@ public struct CustomDirectoryHandler: HTTPHandler {
     }
 
     public func handleRequest(_ request: HTTPRequest) async throws -> HTTPResponse {
-        NSLog("CustomDirectoryHandler: \(request)")
         guard
             let filePath = makeFileURL(for: request.path.replacingOccurrences(of: "+", with: " ")),
             let data = try? Data(contentsOf: filePath) else {

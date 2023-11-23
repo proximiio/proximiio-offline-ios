@@ -14,36 +14,40 @@ extension ProximiioOffline {
         timer = DispatchSource.makeTimerSource(queue: queue)
         timer!.schedule(deadline: .now(), repeating: .seconds(Int(syncInterval)))
         timer!.setEventHandler { [weak self] in
-            NSLog("Proximi.io Offline API syncing... (\(self!.getLastSync()))")
-            
-            if (self != nil && !self!.isOnline) {
-                NSLog("Proximi.io Offline API skipping data flush, connection not available")
-                return
-            }
-            
-            guard let offline = self else {
-                NSLog("Proximi.io Offline API instance not available, skipping sync")
-                return
-            }
-            
-            do {
-                try offline.flush()
-            } catch (let ex) {
-                NSLog("Flush Error \(ex)")
-            }
-            
-            offline.auditClient.sync(delta: offline.getLastSync()) { changes in
-                if (changes > 0) {
-                    offline.touchLastSync()
-                    DispatchQueue.main.async {
-                        if (Proximiio.sharedInstance().authenticated()) {
-                            Proximiio.sharedInstance().sync { result in
-                                if (result) {
-                                    NSLog("Proximi.io SDK sync success")
+            DispatchQueue.main.async {
+                let delta = self!.getLastSync()
+                
+                NSLog("Proximi.io Offline API syncing... (\(delta))")
+                
+                if (self != nil && !self!.isOnline) {
+                    NSLog("Proximi.io Offline API skipping data flush, connection not available")
+                    return
+                }
+                
+                guard let offline = self else {
+                    NSLog("Proximi.io Offline API instance not available, skipping sync")
+                    return
+                }
+                
+                do {
+                    try offline.flush()
+                } catch (let ex) {
+                    NSLog("Flush Error \(ex)")
+                }
+                
+                offline.auditClient.sync(delta: delta) { changes in
+                    if (changes > 0) {
+                        offline.touchLastSync()
+                        DispatchQueue.main.async {
+                            if (Proximiio.sharedInstance().authenticated()) {
+                                Proximiio.sharedInstance().sync { result in
+                                    if (result) {
+                                        NSLog("Proximi.io SDK sync success")
+                                    }
                                 }
+                            } else {
+                                NSLog("Skipping Proximi.io sync (not authorized)")
                             }
-                        } else {
-                            NSLog("Skipping Proximi.io sync (not authorized)")
                         }
                     }
                 }
