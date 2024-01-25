@@ -16,8 +16,7 @@ extension ProximiioOffline {
         timer!.setEventHandler { [weak self] in
             DispatchQueue.main.async {
                 let delta = self!.getLastSync()
-                
-                NSLog("Proximi.io Offline API syncing... (\(delta))")
+                NSLog("Proximi.io Offline API syncing... (\(delta)) online status: (\(self!.isOnline))")
                 
                 if (self != nil && !self!.isOnline) {
                     NSLog("Proximi.io Offline API skipping data flush, connection not available")
@@ -49,6 +48,8 @@ extension ProximiioOffline {
                                 NSLog("Skipping Proximi.io sync (not authorized)")
                             }
                         }
+                    } else {
+                        NSLog("Proximi.io no new changes available")
                     }
                 }
             }
@@ -71,7 +72,7 @@ extension ProximiioOffline {
     }
     
     func touchLastSync() {
-        let timestamp = Int64(NSDate().timeIntervalSince1970);
+        let timestamp = Int64(NSDate().timeIntervalSince1970)
         let syncStatus = SyncStatus(id: "sync", lastSync: timestamp)
         do {
             try database.insertOrUpdate(element: syncStatus)

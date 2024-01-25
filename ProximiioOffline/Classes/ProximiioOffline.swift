@@ -34,48 +34,57 @@ public final class ProximiioOffline {
         self.geoManager = GeoManager(database: database)
         self.packageManager = PackageManager(database: database)
         self.auditClient = AuditClient(database: database)
+        self.initMonitor()
     }
     
-    public func start(_ token: String, onComplete: @escaping (Bool) -> Void) async throws {
-        self.token = token;
-        
-        // Prepare directory structure
-        checkAndPrepare()
-        
-        // Dispose of collected data
-        try flush()
-        
-        if (getLastSync() == 0) {
-            // Spawn database records from included files on first run
-            try packageManager.preload()
-            try geoManager.preload()
+    public func resetAll() {
+        let syncStatus = SyncStatus(id: "sync", lastSync: 0)
+        do {
+            try self.database.deleteAllAndInsert(element: syncStatus)
+            NSLog("database reset successful")
+        } catch {
+            NSLog("database reset unsuccessful")
         }
-
-        // Prepare JSON cache
-        try packageManager.build()
-        try geoManager.build()
-        
-        // HTTP Routes
-        await add_routes(server)
-        
-        // Start Sync Loop
-        initSyncTimer()
-        
-        // Start Local Web Server
-        Task {
-            try await server.start()
-        }
-        
-        // Wait until the web server is running
-        try await server.waitUntilListening()
-        let address = await getAddress();
-        
+    }
+    
+    public func start(_ token: String) async -> Bool {
         // Network status monitor
-        initMonitor()
-        
-        // ProximiioSDK Instance Authorization
-        NSLog("Proximi.io Offline API Running")
-        initProximiio(address, onComplete: onComplete)
+        return await withCheckedContinuation { continuation in
+            self.token = token;
+            do {
+                // Prepare directory structure
+                checkAndPrepare()
+                
+                // Dispose of collected data
+                try flush()
+                
+                if (getLastSync() == 0) {
+                    // Spawn database records from included files on first run
+                    try packageManager.preload()
+                    try geoManager.preload()
+                }
+
+                // Prepare JSON cache
+                try packageManager.build()
+                try geoManager.build()
+                
+                Task {
+                    await add_routes(server)
+                    Task {
+                        try await server.start()
+                    }
+                    try await server.waitUntilListening()
+                    let address = await self.getAddress();
+                    let result = await self.initProximiio(address)
+                    NSLog("Proximi.io Offline API Running")
+                }
+                
+                initSyncTimer()
+                continuation.resume(returning: true)
+            } catch {
+                continuation.resume(returning: false)
+            }
+        }
     }
     
     func socketToString(addr: Socket.Address?) -> String {

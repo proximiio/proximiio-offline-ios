@@ -51,6 +51,7 @@ class GeoManager {
             var openmaptiles = sources?["openmaptiles"] as? [String: Any]
             if (openmaptiles != nil) {
                 openmaptiles!["url"] = "http://localhost:32080/data/v3.json"
+                openmaptiles!["volatile"] = true
             }
             sources?["openmaptiles"] = openmaptiles
             style["sources"] = sources

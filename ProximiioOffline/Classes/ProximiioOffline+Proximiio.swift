@@ -9,36 +9,29 @@ import Foundation
 import Proximiio
 
 extension ProximiioOffline {
-    func initProximiio(_ address: String, onComplete: @escaping (Bool) -> Void) {
-        NSLog("Proximi.io Offline API Authorizing ProximiioSDK Instance")
-        (ProximiioAPI.sharedManager())?.setApi(address)
-        (ProximiioAPI.sharedManager())?.setApiVersion("v5")
-        let lastSync = getLastSync()
-        
-        Proximiio.sharedInstance().auth(withToken:token) { state in
-            if (state == kProximiioReady) {
-                if (lastSync == 0) {
+    func initProximiio(_ address: String) async -> Bool {
+        return await withCheckedContinuation { continuation in
+            ProximiioAPI.sharedManager()?.setApi(address)
+            ProximiioAPI.sharedManager()?.setApiVersion("v5")
+            ProximiioMapStyle.cs_deleteFromDB(withCondition: "")
+            NSLog("Proximi.io Offline API Authorizing ProximiioSDK Instance")
+            Proximiio.sharedInstance().auth(withToken:token) { state in
+                if (state == kProximiioReady) {
+                    NSLog("Proximi.io running sync")
                     Proximiio.sharedInstance().sync { success in
+                        NSLog("Proximi.io sync success: \(success)")
                         if (success) {
-                            DispatchQueue.main.async {
-                                NSLog("Proximi.io Offline API ProximiioSDK Instance Authorized")
-                                onComplete(true)
-                            }
+                            NSLog("Proximi.io Offline API ProximiioSDK Instance Authorized")
+                            continuation.resume(returning: true)
+                            
                         } else {
                             NSLog("Proximi.io Offline API ProximiioSDK Synchronization Failed")
+                            continuation.resume(returning: false)
                         }
                     }
                 } else {
-                    DispatchQueue.main.async {
-                        NSLog("Proximi.io Offline API ProximiioSDK Instance Authorized")
-                        onComplete(true)
-                    }
-                }
-                NSLog("Proximi.io Offline API ProximiioSDK Instance Authorized")
-            } else {
-                NSLog("Proximi.io Offline API ProximiioSDK Authorization Failed")
-                DispatchQueue.main.async {
-                    onComplete(false)
+                    NSLog("Proximi.io Offline API ProximiioSDK Authorization Failed")
+                    continuation.resume(returning: false)
                 }
             }
         }
