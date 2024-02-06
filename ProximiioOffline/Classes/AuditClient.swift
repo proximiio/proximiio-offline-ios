@@ -8,6 +8,8 @@
 import Foundation
 import Alamofire
 import StorageDone
+import CrystDBCipher
+import Proximiio
 
 class AuditClient {
     let database: StorageDoneDatabase
@@ -28,6 +30,8 @@ class AuditClient {
             "campuses"
         case "Department":
             "departments"
+        case "Feature":
+            "features"
         case "Floor":
             "floors"
         case "Geofence":
@@ -52,17 +56,18 @@ class AuditClient {
             
             if (action == "delete") {
                 try database.delete(element: model)
+                if (entity == "Feature") {
+                    ProximiioGeoJSON.cs_deleteFromDB(withCondition: "identifier == '\(id)'")
+                }
             } else {
-                try database.insertOrUpdate(element: model)
+                try database.upsert(element: model)
             }
         } catch {
-            NSLog("Serializatoin error: \(action), \(entity), \(data)")
+            NSLog("Serialization error: \(action), \(entity), \(data)")
         }
     }
     
-    public func sync(delta: Int64, onComplete: @escaping (Int) -> Void) {
-        NSLog("Audit Sync Start")
-        
+    @MainActor public func sync(delta: Int64, onComplete: @escaping (Int) -> Void) {
         let request = AF.request("https://api.proximi.fi/v5/audit/changes?delta=\(delta * 1000)", headers: [
             "Authorization": "Bearer \(ProximiioOffline.shared.token)"
         ])

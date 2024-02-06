@@ -1,4 +1,3 @@
-//
 //  CampusesHandler.swift
 //  ProximiioOffline
 //
@@ -10,7 +9,7 @@ import FlyingFox
 
 struct CampusesHandler: HTTPHandler {
     public func handleRequest(_ request: HTTPRequest) async throws -> HTTPResponse {
-        return HTTPResponse(
+        return await HTTPResponse(
             statusCode: .ok,
             headers: [.contentType: "application/json"],
             body: ProximiioOffline.shared.getCampuses()

@@ -10,7 +10,7 @@ import FlyingFox
 
 struct PackageHandler: HTTPHandler {
     public func handleRequest(_ request: HTTPRequest) async throws -> HTTPResponse {
-        return HTTPResponse(
+        return await HTTPResponse(
             statusCode: .ok,
             headers: [.contentType: "application/json"],
             body: ProximiioOffline.shared.getPackage()

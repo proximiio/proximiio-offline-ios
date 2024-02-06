@@ -7,57 +7,62 @@
 
 import Foundation
 import Proximiio
+import StorageDone
 
 extension ProximiioOffline {
     func initSyncTimer() {
-        let queue = DispatchQueue(label: "io.proximi.app.timer")  // you can also use `DispatchQueue.main`, if you want
+        let queue = DispatchQueue(label: "io.proximi.app.timer")
         timer = DispatchSource.makeTimerSource(queue: queue)
         timer!.schedule(deadline: .now(), repeating: .seconds(Int(syncInterval)))
         timer!.setEventHandler { [weak self] in
-            DispatchQueue.main.async {
-                let delta = self!.getLastSync()
-                NSLog("Proximi.io Offline API syncing... (\(delta)) online status: (\(self!.isOnline))")
-                
-                if (self != nil && !self!.isOnline) {
-                    NSLog("Proximi.io Offline API skipping data flush, connection not available")
-                    return
-                }
-                
-                guard let offline = self else {
-                    NSLog("Proximi.io Offline API instance not available, skipping sync")
-                    return
-                }
-                
-                do {
-                    try offline.flush()
-                } catch (let ex) {
-                    NSLog("Flush Error \(ex)")
-                }
-                
-                offline.auditClient.sync(delta: delta) { changes in
-                    if (changes > 0) {
-                        offline.touchLastSync()
-                        DispatchQueue.main.async {
-                            if (Proximiio.sharedInstance().authenticated()) {
-                                Proximiio.sharedInstance().sync { result in
-                                    if (result) {
-                                        NSLog("Proximi.io SDK sync success")
-                                    }
-                                }
-                            } else {
-                                NSLog("Skipping Proximi.io sync (not authorized)")
-                            }
-                        }
-                    } else {
-                        NSLog("Proximi.io no new changes available")
-                    }
-                }
+            Task { @MainActor in
+                await self?.sync()
             }
         }
         
         timer!.resume()
     }
     
+    func sync() async -> Bool {
+        return await withCheckedContinuation { continuation in
+            let delta = self.getLastSync()
+            NSLog("Proximi.io Offline API syncing... (\(delta)) online status: (\(self.isOnline))")
+            
+            if (!isOnline) {
+                NSLog("Proximi.io Offline API skipping data flush, connection not available")
+                continuation.resume(returning: false);
+                return
+            }
+            
+            do {
+                try flush()
+            } catch (let ex) {
+                continuation.resume(returning: false);
+                NSLog("Flush Error \(ex)")
+            }
+            
+            auditClient.sync(delta: delta) { changes in
+                if (changes > 0) {
+                    self.touchLastSync()
+                    if (Proximiio.sharedInstance().authenticated()) {
+                        Proximiio.sharedInstance().sync { result in
+                            if (result) {
+                                NSLog("Proximi.io SDK sync success")
+                                continuation.resume(returning: true);
+                            }
+                        }
+                    } else {
+                        NSLog("Skipping Proximi.io sync (not authorized)")
+                        continuation.resume(returning: false);
+                    }
+                } else {
+                    //NSLog("Proximi.io no new changes available")
+                    continuation.resume(returning: true);
+                }
+            }
+        }
+    }
+
     func getLastSync() -> Int64 {
         guard let syncs: [SyncStatus] = try? database.get() else {
             return 0 as Int64
@@ -75,7 +80,7 @@ extension ProximiioOffline {
         let timestamp = Int64(NSDate().timeIntervalSince1970)
         let syncStatus = SyncStatus(id: "sync", lastSync: timestamp)
         do {
-            try database.insertOrUpdate(element: syncStatus)
+            self.database ++= syncStatus
         } catch {
             NSLog("error while creating sync state entry")
         }

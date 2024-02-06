@@ -14,6 +14,7 @@ import StorageDone
 import Proximiio
 import Network
 
+@MainActor
 public final class ProximiioOffline {
     public static let shared = ProximiioOffline()
     let name = "ProximiioOffline"
@@ -29,6 +30,7 @@ public final class ProximiioOffline {
     var syncInterval: Int64 = 180
     var timer: DispatchSourceTimer?
     var isOnline = false
+    var serverTask: Task<(), Error> = Task {}
     
     init() {
         self.geoManager = GeoManager(database: database)
@@ -40,17 +42,17 @@ public final class ProximiioOffline {
     public func resetAll() {
         let syncStatus = SyncStatus(id: "sync", lastSync: 0)
         do {
-            try self.database.deleteAllAndInsert(element: syncStatus)
+            try self.database.deleteAllAndInsert(element: OfflineModel(id: "dummy", data: "{}", type: "dummy"))
             NSLog("database reset successful")
         } catch {
             NSLog("database reset unsuccessful")
         }
     }
+
     
     public func start(_ token: String) async -> Bool {
-        // Network status monitor
         return await withCheckedContinuation { continuation in
-            self.token = token;
+            self.token = token
             do {
                 // Prepare directory structure
                 checkAndPrepare()
@@ -63,24 +65,23 @@ public final class ProximiioOffline {
                     try packageManager.preload()
                     try geoManager.preload()
                 }
-
+                
                 // Prepare JSON cache
                 try packageManager.build()
                 try geoManager.build()
                 
-                Task {
+                let task = Task {
                     await add_routes(server)
-                    Task {
+                    self.serverTask = Task {
                         try await server.start()
                     }
                     try await server.waitUntilListening()
-                    let address = await self.getAddress();
+                    let address = await self.getAddress()
+                    await self.sync()
                     let result = await self.initProximiio(address)
-                    NSLog("Proximi.io Offline API Running")
+                    initSyncTimer()
+                    continuation.resume(returning: true)
                 }
-                
-                initSyncTimer()
-                continuation.resume(returning: true)
             } catch {
                 continuation.resume(returning: false)
             }

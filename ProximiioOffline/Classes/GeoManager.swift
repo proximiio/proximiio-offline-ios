@@ -41,7 +41,6 @@ class GeoManager {
         let features = filteredFeatures.map({ try! $0.json() })
         self.features = ["type": "FeatureCollection", "features": features]
         self.featuresJSON = try JSONSerialization.data(withJSONObject: self.features)
-        
         let filteredStyle: [OfflineModel] = "type".equal("styles")<-database
         let styles = filteredStyle.map({ try! $0.json() })
         
