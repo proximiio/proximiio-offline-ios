@@ -42,6 +42,8 @@ class AuditClient {
             "places"
         case "PrivacyZone":
             "privacy_zones"
+        case "Style":
+            "styles"
         default:
             "unknown"
         }
@@ -53,11 +55,10 @@ class AuditClient {
             let serialized = String(decoding: jsonData, as: UTF8.self)
             let id = data["id"] as! String
             let model = OfflineModel(id: id, data: serialized, type: self.getType(entity))
-            
             if (action == "delete") {
                 try database.delete(element: model)
                 if (entity == "Feature") {
-                    ProximiioGeoJSON.cs_deleteFromDB(withCondition: "identifier == '\(id)'")
+                    ProximiioGeoJSON.cs_deleteFromDB(withCondition: "identifier = '\(id)'")
                 }
             } else {
                 try database.upsert(element: model)
